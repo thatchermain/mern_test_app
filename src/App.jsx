@@ -14,7 +14,7 @@ function App() {
       age: age,
       score: score,
     };
-    const results = await fetch(`${process.env.API_URL}/players`, {
+    const results = await fetch(`${process.env.REACT_APP_API_URL}/players`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ function App() {
   };
 
   const getDataFromServer = async () => {
-    const res = await fetch(`${process.env.API_URL}/players`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/players`, {
       method: 'GET',
     });
     const data = await res.json();
@@ -39,15 +39,19 @@ function App() {
     <div className='App'>
       <p>name</p>
       <input
-        type='name'
+        type='text'
         name='name'
         onChange={(e) => setName(e.target.value)}
       />
       <p>age</p>
-      <input type='age' name='age' onChange={(e) => setAge(e.target.value)} />
+      <input
+        type='number'
+        name='age'
+        onChange={(e) => setAge(e.target.value)}
+      />
       <p>score</p>
       <input
-        type='score'
+        type='number'
         name='score'
         onChange={(e) => setScore(e.target.value)}
       />
@@ -65,11 +69,11 @@ function App() {
       {receivedData &&
         receivedData.map((item, i) => {
           return (
-            <>
+            <div key={i}>
               <h1>{item.name}</h1>
               <h2>{item.age}</h2>
               <h3>{item.score}</h3>
-            </>
+            </div>
           );
         })}
     </div>
